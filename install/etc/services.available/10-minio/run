@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/00-container
+PROCESS_NAME="minio"
+
+check_container_initialized
+check_service_initialized init
+liftoff
+
+print_info "Starting minio"
+exec s6-setuidgid minio minio server -C /config /data
+
